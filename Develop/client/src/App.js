@@ -3,9 +3,32 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
+import {ApolloClient, InMemoryCache, ApolloProvider, createHTTPLink} from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
+
+
+const httpLink = createHTTPLink({
+  uri: '/graphql'
+})
+
+const auth = setContext((_, { headers }) =>{
+  const token = localStorage.getItem('id_token')
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  }
+})
+
+const client = new ApolloClient({
+  link: auth.concat(httpLink),
+  cache: new InMemoryCache()
+})
 
 function App() {
   return (
+    <ApolloProvider client={client}>
     <Router>
       <>
         <Navbar />
@@ -16,6 +39,7 @@ function App() {
         </Switch>
       </>
     </Router>
+    </ApolloProvider>
   );
 }
 
