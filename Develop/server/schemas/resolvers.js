@@ -32,7 +32,7 @@ const resolvers = {Query: {
             user: userData
         }
     },
-    adduser: async(parent, args, context)=> {
+    addUser: async(parent, args, context)=> {
         const userData = await User.create (args)
         const token = signToken(userData)
 
