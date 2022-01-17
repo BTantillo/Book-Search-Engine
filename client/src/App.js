@@ -12,7 +12,9 @@ const httpLink = createHttpLink({
 })
 
 const auth = setContext((_, { headers }) =>{
+  console.log("In App.js auth function")
   const token = localStorage.getItem('id_token')
+  console.log(token)
   return {
     headers: {
       ...headers,

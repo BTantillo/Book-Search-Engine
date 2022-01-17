@@ -5,11 +5,13 @@ import decode from 'jwt-decode';
 class AuthService {
   // get user data
   getProfile() {
+    console.log("AuthService in auth.js")
     return decode(this.getToken());
   }
 
   // check if user's logged in
   loggedIn() {
+    console.log("loggedIn auth.js ")
     // Checks if there is a saved token and it's still valid
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token); // handwaiving here
@@ -17,6 +19,7 @@ class AuthService {
 
   // check if token is expired
   isTokenExpired(token) {
+    console.log("isTokenExp auth.js")
     try {
       const decoded = decode(token);
       if (decoded.exp < Date.now() / 1000) {
@@ -33,6 +36,7 @@ class AuthService {
   }
 
   login(idToken) {
+    console.log("With auth helper")
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
     window.location.assign('/');

@@ -16,7 +16,7 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app }); 
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // if we're in production, serve client/build as static assets
@@ -25,6 +25,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("*", (req, res) => {
+  console.log("we are inside this server file")
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 // app.use(routes);
