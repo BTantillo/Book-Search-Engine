@@ -2,7 +2,8 @@
 
 ## Purpose
 
-* This app converts a funtioning Google Books API search built with a RESTFULL API into a GraphQL API built with an Apollo Server
+* This app converts a funtioning Google Books API search built with a RESTFULL API into a GraphQL API built with an Apollo Server.
+* The purpose was to create a website a user could login into, search for differnt books, and add them to their own profile reading list. 
 
 ## Built With
 
